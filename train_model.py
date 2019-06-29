@@ -114,3 +114,7 @@ with tf.Session(config=conf) as sess:
             print(i, cur_loss)
             if i % 100000 == 0 and i > 0:
                 save_path = saver.save(sess, "models/model3.ckpt")
+                embs = sess.run(embeddings)
+                df_embs = pd.DataFrame(embs)
+                df_embs['prem'] = vocab
+                df_embs.to_csv('data/embeddings_live.csv')
